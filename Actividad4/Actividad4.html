@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formato en HTML</title>
+</head>
+<body>
+
+    <h2>HTML semántico</h2>
+    <p>
+        HTML semántico significa usar las etiquetas correctas según el significado del contenido. 
+        Por ejemplo, en lugar de usar solo <code>&lt;div&gt;</code> para todo, se usan etiquetas que describen la función del contenido.
+    </p>
+
+    <h3>¿Por qué tantos headers?</h3>
+    <p>
+        Cada <code>&lt;header&gt;</code> sirve como cabecera de una página o de una sección. 
+        Por eso puede haber varios en un documento, siempre que estén dentro de diferentes secciones o artículos.
+    </p>
+
+    <h3>Ejemplo práctico de estructura semántica:</h3>
+
+    <header>
+        <h1>Blog del Aula</h1>
+        <p>Ejemplo de estructura semántica en HTML.</p>
+    </header>
+
+    <main>
+        <section>
+            <header>
+                <h2>Noticias del día</h2>
+            </header>
+
+            <article>
+                <h3>Nuevo proyecto web</h3>
+                <p>Los alumnos han creado un nuevo <em>proyecto de desarrollo web</em> utilizando etiquetas semánticas.</p>
+                <p>Publicado por <cite>Profesor Alejandro</cite></p>
+            </article>
+
+            <article>
+                <h3>Excursión al museo</h3>
+                <p>Hoy visitamos el museo de ciencias. Una gran experiencia de aprendizaje.</p>
+            </article>
+        </section>
+
+        <aside>
+            <h4>Notas del profesor</h4>
+            <p>Recuerda repasar las etiquetas de formato antes del examen.</p>
+        </aside>
+    </main>
+
+    <footer>
+        <p>© 2025 Departamento de Informática</p>
+    </footer>
+
+</body>
+</html>
