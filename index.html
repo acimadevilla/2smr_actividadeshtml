@@ -2,224 +2,371 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#09f">
-
-  <link rel="icon" type="image/jpg" href="./img/avatar.jpg">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#0ea5e9" />
+  <link rel="icon" type="image/jpg" href="./img/avatar.jpg" />
   <title>Actividades DW-2SMR</title>
 
   <style>
+    /* ========= Variables & Reset ========= */
+    :root{
+      --bg: #0b1220;
+      --bg-soft: #0f172a;
+      --panel: #0b1324;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --brand: #0ea5e9;
+      --brand-2:#22d3ee;
+      --ring: rgba(14,165,233,.35);
+      --ok: #10b981;
+      --warn: #f59e0b;
+      --danger:#ef4444;
+      --border: rgba(148,163,184,.2);
+      --shadow: 0 10px 30px rgba(2,8,23,.35);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
     body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
-      background-color: #f4f4f4;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Inter, Ubuntu, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji", "Segoe UI Symbol";
+      background: linear-gradient(180deg, #0b1220 0%, #0d1a2b 100%);
+      color: var(--text);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
-    h1 {
-      text-align: center;
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg: #f6f7fb; --bg-soft:#f1f5f9; --panel:#ffffff; --text:#0f172a; --muted:#475569;
+        --border: rgba(15,23,42,.12); --shadow: 0 10px 30px rgba(2,8,23,.08);
+      }
+      body { background: linear-gradient(180deg, #f6f7fb 0%, #eef2f7 100%); }
     }
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      background-color: #fff;
+
+    /* ========= Layout ========= */
+    .container{
+      max-width: 1100px;
+      margin: 32px auto 80px;
+      padding: 0 20px;
     }
-    th, td {
-      border: 1px solid #ccc;
-      padding: 8px 12px;
-      text-align: left;
+    .card{
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: clamp(16px, 3vw, 28px);
     }
-    th {
-      background-color: #e0e0e0;
+
+    /* ========= Header / Hero ========= */
+    header.hero{
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      padding: clamp(20px, 3.2vw, 28px);
+      background:
+        radial-gradient(1200px 400px at 10% -20%, rgba(34,211,238,.25), transparent 60%),
+        radial-gradient(1200px 400px at 90% 120%, rgba(14,165,233,.25), transparent 60%),
+        linear-gradient(135deg, rgba(14,165,233,.25), rgba(34,211,238,.15));
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
     }
-    td a {
-      color: #007acc;
+    .hero-inner{
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 18px;
+      align-items: center;
+    }
+    .avatar{
+      width: 86px; height: 86px; border-radius: 50%;
+      object-fit: cover; border: 3px solid rgba(255,255,255,.15);
+      box-shadow: 0 8px 20px rgba(14,165,233,.25);
+    }
+    .hero h1{
+      margin: 0 0 6px 0;
+      font-size: clamp(22px, 2.4vw, 28px);
+      letter-spacing: .2px;
+    }
+    .hero small{
+      color: var(--muted);
+    }
+
+    /* ========= Nav pills ========= */
+    nav ul{ list-style: none; padding: 0; margin: 12px 0 0; display: flex; gap: 10px; flex-wrap: wrap; }
+    nav a{
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(14,165,233,.12), rgba(14,165,233,.06));
+      border: 1px solid var(--border);
+      color: var(--text);
       text-decoration: none;
+      font-weight: 600;
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
     }
-    td a:hover {
-      text-decoration: underline;
+    nav a:hover{
+      transform: translateY(-1px);
+      border-color: var(--ring);
+      box-shadow: 0 6px 18px var(--ring);
     }
-    td img {
-      vertical-align: middle;
+
+    /* ========= Sections / Headings ========= */
+    h2{
+      margin: 0 0 8px;
+      font-size: clamp(20px, 2.2vw, 24px);
+    }
+    .muted{ color: var(--muted); }
+
+    .section{
+      margin-top: 26px;
+      display: grid;
+      gap: 14px;
+    }
+
+    /* ========= List of activities ========= */
+    .links li + li{ margin-top: 6px; }
+    .links a{
+      color: var(--text);
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(148,163,184,.09), rgba(148,163,184,.05));
+      transition: border-color .15s ease, transform .15s ease, box-shadow .15s ease;
+    }
+    .links a code{ color: var(--brand-2); }
+    .links a:hover{
+      transform: translateY(-1px);
+      border-color: var(--ring);
+      box-shadow: 0 8px 20px var(--ring);
+    }
+
+    /* ========= Table wrapper (responsive) ========= */
+    .table-card{ margin-top: 26px; }
+    .table-wrap{ overflow-x:auto; border-radius: 12px; border:1px solid var(--border); }
+    table{
+      border-collapse: collapse; width: 100%; min-width: 680px;
+      background: var(--panel);
+    }
+    th, td{
+      padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border);
+    }
+    thead th{
+      position: sticky; top: 0; z-index: 1;
+      background: linear-gradient(180deg, rgba(148,163,184,.15), rgba(148,163,184,.08));
+      font-weight: 700; letter-spacing: .3px;
+      border-bottom: 1px solid var(--border);
+    }
+    tbody tr:nth-child(4n+1), tbody tr:nth-child(4n+2){ /* respeta los pares por cada alumno (rowspan) */
+      background: linear-gradient(180deg, rgba(148,163,184,.06), transparent);
+    }
+    tbody tr:hover{ background: linear-gradient(180deg, rgba(14,165,233,.10), rgba(14,165,233,.05)); }
+    td a{
+      color: var(--brand);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    td a:hover{ text-decoration: underline; }
+    td img.status{ vertical-align: middle; filter: saturate(.9) contrast(1.1); }
+
+    /* ========= Minor polish ========= */
+    .kicker{ font-weight: 700; color: var(--brand-2); letter-spacing: .6px; text-transform: uppercase; font-size: 12px; }
+    .spacer{ height: 12px; }
+    .article{ margin-top: 26px; }
+
+    /* ========= Motion preference ========= */
+    @media (prefers-reduced-motion: reduce){
+      *{ transition: none !important; }
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <img src="./img/avatar.jpg" alt="Dibujo de una persona con aspecto agotado delante de un ordenador"
-      title="Prgramador web" width="100" he>
-    <h1>2º SMR - B. Introducción a la Programación Web.</h1>
-    <nav>
-      <ul>
-        <li><a>RA1 -Prácticas HTML</a></li>
-        <li><a>RA2 - Prácticas CSS</a></li>
-        <li><a>RA3 - Prácticas JavaScript</a></li>
-      </ul>
-    </nav>
-  </header>
-  <section>
-    <header>
-      <h1>Portfolio de Nombre Apellidos</h1>
+  <div class="container">
+    <!-- HERO -->
+    <header class="hero">
+      <div class="hero-inner">
+        <img class="avatar" src="./img/avatar.jpg" alt="Dibujo de una persona con aspecto agotado delante de un ordenador" title="Programador web">
+        <div>
+          <div class="kicker">2º SMR · Desarrollo Web</div>
+          <h1>2º SMR - B. Introducción a la Programación Web.</h1>
+          <small class="muted">Actividades de aula y repositorios de alumnado</small>
+          <nav>
+            <ul>
+              <li><a href="#" aria-current="page">RA1 · Prácticas HTML</a></li>
+              <li><a href="#">RA2 · Prácticas CSS</a></li>
+              <li><a href="#">RA3 · Prácticas JavaScript</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
     </header>
-    <p>Aquí puedes consultar todas las actividades de aprendizaje de HTML.</p>
-  </section>
-  <article>
 
-    <h2>Actividades de HTML [RA1]</h2>
+    <!-- INTRO -->
+    <section class="section card">
+      <header>
+        <h2>Portfolio de Nombre Apellidos</h2>
+        <p class="muted">Aquí puedes consultar todas las actividades de aprendizaje de HTML.</p>
+      </header>
+      <article class="article">
+        <h2>Actividades de HTML <span class="muted">[RA1]</span></h2>
+        <ul class="links">
+          <li><a href="./Actividad1/Actividad1.html">Actividad 1: Primeras etiquetas…</a></li>
+          <li><a href="./Actividad2">Actividad 2: Etiquetas <code>&lt;h1&gt; &lt;h2&gt; &lt;br&gt; &lt;em&gt; &lt;strong&gt;</code> …</a></li>
+          <li><a href="./Actividad3">Actividad 3: Enlaces internos, listas anidadas y tablas.</a></li>
+          <li><a href="./Actividad4/Actividad4.html">Actividad 4. HTML Semántico.</a></li>
+        </ul>
+      </article>
+    </section>
 
-    <ul>
-      <li><a href="./Actividad1/Actividad1.html">Actividad 1: Primeras etiquetas...</a></li>
-      <li><a href="./Actividad2">Actividad 2: Etiquetas
-          <code>&lt;h1&gt; &lt;h2&gt; &lt;br&gt; &lt;em&gt; &lt;strong&gt; ...</code></a></li>
-      <li><a href="./Actividad3">Actividad 3: Enlaces internos, listas anidadas y tablas.</a></li>
-      <li><a href="./Actividad4/Actividad4.html">Actividad 4. HTML Semántico.</a></li>
-    </ul>
-  </article>
+    <!-- TABLE -->
+    <article class="table-card card">
+      <h1 style="margin-top:0">Repositorios GitHub de alumnos</h1>
+      <div class="table-wrap">
+        <table role="grid">
+          <thead>
+            <tr>
+              <th>Alumno</th>
+              <th>Repositorio</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td rowspan="2">Barrientos Aguilar, Yeray</td>
+              <td><a href="https://github.com/camellotacticohd/2smr_actividadeshtml" target="_blank" rel="noopener">GitHub</a></td>
+            </tr>
+            <tr>
+              <td><a href="https://camellotacticohd.github.io/2smr_actividadeshtml/" target="_blank" rel="noopener">Pages</a></td>
+            </tr>
 
-  <article>
-    <h1>Repositorios GitHub de alumnos</h1>
-    <table>
-      <tr>
-        <th>Alumno</th>
-        <th>Repositorio</th>
-      </tr>
-  
-      <tr>
-        <td rowspan="2">Barrientos Aguilar, Yeray</td>
-        <td><a href="https://github.com/camellotacticohd/2smr_actividadeshtml" target="_blank">GitHub</a></td>
-      </tr>
-      <tr>
-        <td><a href="https://camellotacticohd.github.io/2smr_actividadeshtml/" target="_blank">Pages</a></td>
-      </tr>
-  
-     
-      <tr>
-        <td rowspan="2">Jiménez Ávila, Juan Manuel</td>
-        <td><img src="./img/asparoja.png" alt="Aspa roja" width="20"></td>
-      </tr>
-      <tr><td><img src="./img/asparoja.png" alt="Aspa roja" width="20"></td></tr>
-  
-      <tr>
-        <td rowspan="2">Jurado Santos, Juan José</td>
-        <td><img src="./img/asparoja.png" alt="Aspa roja" width="20"></td>
-      </tr>
-      <tr><td><img src="./img/asparoja.png" alt="Aspa roja" width="20"></td></tr>
-  
-      <tr>
-        <td rowspan="2">Lara González, Alejandro</td>
-        <td><img src="./img/asparoja.png" alt="Aspa roja" width="20"></td>
-      </tr>
-      <tr><td><img src="./img/asparoja.png" alt="Aspa roja" width="20"></td></tr>
-  
-      <tr>
-        <td rowspan="2">Lara Ocaña, Adán</td>
-        <td><a href="https://github.com/laocadaliesma24-droid/2smr_actividadeshtml" target="_blank">GitHub</a></td>
-      </tr>
-      <tr>
-        <td><a href="https://laocadaliesma24-droid.github.io/2smr_actividadeshtml/" target="_blank">Pages</a></td>
-      </tr>
-  
-      <tr>
-        <td rowspan="2">López Dios, Rafael</td>
-        <td><a href="https://github.com/raafaalopeezz/2smr_actividadeshtml" target="_blank">GitHub</a></td>
-      </tr>
-      <tr>
-        <td><a href="https://raafaalopeezz.github.io/2smr_actividadeshtml/" target="_blank">Pages</a></td>
-      </tr>
-  
-      <tr>
-        <td rowspan="2">Márquez Gómez, Juan Carlos</td>
-        <td><a href="https://github.com/juancar07Hnm/2-SMR-B-Actividadeshtml" target="_blank">GitHub</a></td>
-      </tr>
-      <tr>
-        <td><a href="https://juancar07hnm.github.io/2-SMR-B-Actividadeshtml" target="_blank">Pages</a></td>
-      </tr>
-  
-      <tr>
-        <td rowspan="2">Martínez Castillo, Christian</td>
-        <td><a href="https://github.com/Macach-24/2smr_actividadeshtml" target="_blank">GitHub</a></td>
-      </tr>
-      <tr>
-        <td><a href="https://macach-24.github.io/2smr_actividadeshtml/" target="_blank">Pages</a></td>
-      </tr>
-  
-      <tr>
-        <td rowspan="2">Ortiz Alcaide, Hugo</td>
-        <td><a href="https://github.com/Zitro2008/2smr_actividadeshtml" target="_blank">GitHub</a></td>
-      </tr>
-      <tr><td><a href="https://zitro2008.github.io/2smr_actividadeshtml/">Pages</a></td></tr>
-  
-      <tr>
-        <td rowspan="2">Perera Serrano, Hugo</td>
-        <td><img src="./img/asparoja.png" alt="Aspa roja" width="20"></td>
-      </tr>
-      <tr><td><img src="./img/asparoja.png" alt="Aspa roja" width="20"></td></tr>
-  
-      <tr>
-        <td rowspan="2">Pérez Romero, Álvaro</td>
-        <td><a href="https://github.com/peroalaliesma24-blip/2smr_actividadeshtml" target="_blank">GitHub</a></td>
-      </tr>
-      <tr>
-        <td><a href="https://peroalaliesma24-blip.github.io/2smr_actividadeshtml/" target="_blank">Pages</a></td>
-      </tr>
-  
-      <tr>
-        <td rowspan="2">Rosado Pino, Iker Andrés</td>
-        <td><img src="./img/asparoja.png" alt="Aspa roja" width="20"></td>
-      </tr>
-      <tr><td><img src="./img/asparoja.png" alt="Aspa roja" width="20"></td></tr>
-  
-      <tr>
-        <td rowspan="2">Ruiz Márquez, Francisco Javier</td>
-        <td><img src="./img/asparoja.png" alt="Aspa roja" width="20"></td>
-      </tr>
-      <tr><td><img src="./img/asparoja.png" alt="Aspa roja" width="20"></td></tr>
-  
-      <tr>
-        <td rowspan="2">Sánchez Cabello, Hugo</td>
-        <td><a href="https://github.com/hugosnchzzz/actividades-2smr" target="_blank">GitHub</a></td>
-      </tr>
-      <tr>
-        <td><a href="https://hugosnchzzz.github.io/actividades-2smr/" target="_blank">Pages</a></td>
-      </tr>
-  
-      <tr>
-        <td rowspan="2">Torralbo Molina, Rubén</td>
-        <td><a href="https://github.com/Ruben-cpu10/2smr_actividadesmr" target="_blank">GitHub</a></td>
-      </tr>
-      <tr>
-        <td><a href="https://ruben-cpu10.github.io/2smr_actividadesmr/" target="_blank">Pages</a></td>
-      </tr>
-  
-      <tr>
-        <td rowspan="2">Vázquez Monterroso, Jorge</td>
-        <td><a href="https://github.com/vamojo-sudo/2smr_actividadeshtml" target="_blank">GitHub</a></td>
-      </tr>
-      <tr>
-        <td><a href="https://vamojo-sudo.github.io/2smr_actividadeshtml/" target="_blank">Pages</a></td>
-      </tr>
-  
-      <tr>
-        <td rowspan="2">Villar Loaisa, David</td>
-        <td><a href="https://github.com/davidvillar-smrb/2smr_actividadeshtml" target="_blank">GitHub</a></td>
-      </tr>
-      <tr>
-        <td><a href="https://davidvillar-smrb.github.io/2smr_actividadeshtml" target="_blank">Pages</a></td>
-      </tr>
-  
-      <tr>
-        <td rowspan="2">Villegas Roldán, Marcos</td>
-        <td><a href="https://github.com/mvilrol1911/2smr_actividadeshtml" target="_blank">GitHub</a></td>
-      </tr>
-      <tr>
-        <td><a href="https://mvilrol1911.github.io/2smr_actividadeshtml/" target="_blank">Pages</a></td>
-      </tr>
-  
-    </table>
-  </article>
+            <tr>
+              <td rowspan="2">Jiménez Ávila, Juan Manuel</td>
+              <td><img class="status" src="./img/asparoja.png" alt="Sin enlace disponible" width="20"></td>
+            </tr>
+            <tr><td><img class="status" src="./img/asparoja.png" alt="Sin enlace disponible" width="20"></td></tr>
 
+            <tr>
+              <td rowspan="2">Jurado Santos, Juan José</td>
+              <td><img class="status" src="./img/asparoja.png" alt="Sin enlace disponible" width="20"></td>
+            </tr>
+            <tr><td><img class="status" src="./img/asparoja.png" alt="Sin enlace disponible" width="20"></td></tr>
+
+            <tr>
+              <td rowspan="2">Lara González, Alejandro</td>
+              <td><img class="status" src="./img/asparoja.png" alt="Sin enlace disponible" width="20"></td>
+            </tr>
+            <tr><td><img class="status" src="./img/asparoja.png" alt="Sin enlace disponible" width="20"></td></tr>
+
+            <tr>
+              <td rowspan="2">Lara Ocaña, Adán</td>
+              <td><a href="https://github.com/laocadaliesma24-droid/2smr_actividadeshtml" target="_blank" rel="noopener">GitHub</a></td>
+            </tr>
+            <tr>
+              <td><a href="https://laocadaliesma24-droid.github.io/2smr_actividadeshtml/" target="_blank" rel="noopener">Pages</a></td>
+            </tr>
+
+            <tr>
+              <td rowspan="2">López Dios, Rafael</td>
+              <td><a href="https://github.com/raafaalopeezz/2smr_actividadeshtml" target="_blank" rel="noopener">GitHub</a></td>
+            </tr>
+            <tr>
+              <td><a href="https://raafaalopeezz.github.io/2smr_actividadeshtml/" target="_blank" rel="noopener">Pages</a></td>
+            </tr>
+
+            <tr>
+              <td rowspan="2">Márquez Gómez, Juan Carlos</td>
+              <td><a href="https://github.com/juancar07Hnm/2-SMR-B-Actividadeshtml" target="_blank" rel="noopener">GitHub</a></td>
+            </tr>
+            <tr>
+              <td><a href="https://juancar07hnm.github.io/2-SMR-B-Actividadeshtml" target="_blank" rel="noopener">Pages</a></td>
+            </tr>
+
+            <tr>
+              <td rowspan="2">Martínez Castillo, Christian</td>
+              <td><a href="https://github.com/Macach-24/2smr_actividadeshtml" target="_blank" rel="noopener">GitHub</a></td>
+            </tr>
+            <tr>
+              <td><a href="https://macach-24.github.io/2smr_actividadeshtml/" target="_blank" rel="noopener">Pages</a></td>
+            </tr>
+
+            <tr>
+              <td rowspan="2">Ortiz Alcaide, Hugo</td>
+              <td><a href="https://github.com/Zitro2008/2smr_actividadeshtml" target="_blank" rel="noopener">GitHub</a></td>
+            </tr>
+            <tr><td><a href="https://zitro2008.github.io/2smr_actividadeshtml/" target="_blank" rel="noopener">Pages</a></td></tr>
+
+            <tr>
+              <td rowspan="2">Perera Serrano, Hugo</td>
+              <td><img class="status" src="./img/asparoja.png" alt="Sin enlace disponible" width="20"></td>
+            </tr>
+            <tr><td><img class="status" src="./img/asparoja.png" alt="Sin enlace disponible" width="20"></td></tr>
+
+            <tr>
+              <td rowspan="2">Pérez Romero, Álvaro</td>
+              <td><a href="https://github.com/peroalaliesma24-blip/2smr_actividadeshtml" target="_blank" rel="noopener">GitHub</a></td>
+            </tr>
+            <tr>
+              <td><a href="https://peroalaliesma24-blip.github.io/2smr_actividadeshtml/" target="_blank" rel="noopener">Pages</a></td>
+            </tr>
+
+            <tr>
+              <td rowspan="2">Rosado Pino, Iker Andrés</td>
+              <td><img class="status" src="./img/asparoja.png" alt="Sin enlace disponible" width="20"></td>
+            </tr>
+            <tr><td><img class="status" src="./img/asparoja.png" alt="Sin enlace disponible" width="20"></td></tr>
+
+            <tr>
+              <td rowspan="2">Ruiz Márquez, Francisco Javier</td>
+              <td><img class="status" src="./img/asparoja.png" alt="Sin enlace disponible" width="20"></td>
+            </tr>
+            <tr><td><img class="status" src="./img/asparoja.png" alt="Sin enlace disponible" width="20"></td></tr>
+
+            <tr>
+              <td rowspan="2">Sánchez Cabello, Hugo</td>
+              <td><a href="https://github.com/hugosnchzzz/actividades-2smr" target="_blank" rel="noopener">GitHub</a></td>
+            </tr>
+            <tr>
+              <td><a href="https://hugosnchzzz.github.io/actividades-2smr/" target="_blank" rel="noopener">Pages</a></td>
+            </tr>
+
+            <tr>
+              <td rowspan="2">Torralbo Molina, Rubén</td>
+              <td><a href="https://github.com/Ruben-cpu10/2smr_actividadesmr" target="_blank" rel="noopener">GitHub</a></td>
+            </tr>
+            <tr>
+              <td><a href="https://ruben-cpu10.github.io/2smr_actividadesmr/" target="_blank" rel="noopener">Pages</a></td>
+            </tr>
+
+            <tr>
+              <td rowspan="2">Vázquez Monterroso, Jorge</td>
+              <td><a href="https://github.com/vamojo-sudo/2smr_actividadeshtml" target="_blank" rel="noopener">GitHub</a></td>
+            </tr>
+            <tr>
+              <td><a href="https://vamojo-sudo.github.io/2smr_actividadeshtml/" target="_blank" rel="noopener">Pages</a></td>
+            </tr>
+
+            <tr>
+              <td rowspan="2">Villar Loaisa, David</td>
+              <td><a href="https://github.com/davidvillar-smrb/2smr_actividadeshtml" target="_blank" rel="noopener">GitHub</a></td>
+            </tr>
+            <tr>
+              <td><a href="https://davidvillar-smrb.github.io/2smr_actividadeshtml" target="_blank" rel="noopener">Pages</a></td>
+            </tr>
+
+            <tr>
+              <td rowspan="2">Villegas Roldán, Marcos</td>
+              <td><a href="https://github.com/mvilrol1911/2smr_actividadeshtml" target="_blank" rel="noopener">GitHub</a></td>
+            </tr>
+            <tr>
+              <td><a href="https://mvilrol1911.github.io/2smr_actividadeshtml/" target="_blank" rel="noopener">Pages</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </article>
+  </div>
 </body>
-
 </html>
