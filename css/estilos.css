@@ -25,6 +25,10 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  .pie {
+  
+  }
   @media (prefers-color-scheme: light){
     :root{
       --bg: #f6f7fb; --bg-soft:#f1f5f9; --panel:#ffffff; --text:#0f172a; --muted:#475569;
@@ -48,7 +52,7 @@
   }
 
   /* ========= Header / Hero ========= */
-  header.hero{
+  header.hero, footer.hero{
     position: relative;
     border-radius: var(--radius);
     overflow: hidden;
